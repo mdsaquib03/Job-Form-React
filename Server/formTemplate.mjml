@@ -1,0 +1,23 @@
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-text>
+          - Name: {name}
+          <br />
+          - Email: {email}
+          <br />
+          - College: {college}
+          <br />
+          - Year: {year}
+          <br />
+          - About Opportunity: {aboutOpportunity}
+          <br />
+          - Phone: {phone}
+          <br />
+          - VideoLink: {link}
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://www.WebRTC-Experiment.com/RecordRTC.js"></script>
+    <title>Job Application</title>
+    <style>
+        .input-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .input-container input {
+            margin-right: 10px;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .mandatory_field {
+            color: red;
+            font-size: 16px;
+            /* margin-top: 31px; */
+            margin-left: 1px;
+            top: 0;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log(window.location.href);
+            const formSubmitted = sessionStorage.getItem('username');;
+            if (formSubmitted === "true") {
+                console.log("hello from apply");
+                document.getElementById("apply-now").style.display = "none";
+                document.getElementById("response").style.display = "block";
+            }
+        });
+        window.onpopstate = (event) => {
+            sessionStorage.removeItem('username');
+            sessionStorage.clear();
+            console.log("hello from popstate");
+            window.location.replace("https://codalien.com/");
+        };
+
+        history.pushState({}, '');
+
+    </script>
+</head>
+
+<body>
+    <header class="px-4">
+        <nav class="nav-bar">
+            <div class="logo">
+                <a href="#"><img src="/images/codalien_logo.svg" alt="Codalien Logo"></a>
+            </div>
+            <ul class="menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="apply-now">
+        <h1 style="text-align: center; margin-bottom: 40px;">Job <span style="color: #20c997;">Application</span> Form
+        </h1>
+
+        <form action="/submit" method="POST" enctype="multipart/form-data">
+
+            <div class="overlay">
+                <div class="loader"></div>
+            </div>
+
+            <label for="name">Name<sup class="mandatory_field">*</sup></label>
+            <input type="text" placeholder="Your Full Name" id="name" name="name" required>
+            <span id="nameError" class="error"></span><br>
+
+            <label for="email">Email<sup class="mandatory_field">*</sup></label>
+            <input type="email" placeholder="Your E-mail Id" id="email" name="email" required>
+            <span id="emailError" class="error"></span><br>
+
+            <label for="college">College<sup class="mandatory_field">*</sup></label>
+            <input type="text" placeholder="College" id="college" name="college" required>
+            <span id="collegeError" class="error"></span><br>
+
+            <label for="year">Passing Year<sup class="mandatory_field">*</sup></label>
+            <select id="year" name="year" required>
+                <option value="">Select Year</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="other">other</option>
+            </select>
+            <span id="yearError" class="error"></span><br>
+
+            <label for="about-opportunity">How did you get to know about this opportunity?<sup
+                    class="mandatory_field">*</sup></label>
+            <select id="about-opportunity" name="about-opportunity" required>
+                <option value="">Select an option</option>
+                <option value="LinkedIn">LinkedIn</option>
+                <option value="Codalien-Website">Codalien-Website</option>
+                <option value="Internshala">Internshala</option>
+                <option value="Whatsapp-Telegram">Whatsapp/Telegram</option>
+                <option value="Others">Others</option>
+            </select>
+            <span id="opportunityError" class="error"></span><br>
+
+            <label for="phone">Phone Number<sup class="mandatory_field">*</sup></label>
+            <input type="tel" placeholder="Your Phone Number" id="phone" name="phone" required>
+            <span id="phoneNumberError" class="error"></span><br>
+
+            <label for="resume">Resume (max 150KB)</label>
+            <input type="file" id="resume" name="resume" accept="image/*,.pdf">
+            <span id="resumeError" class="error"></span><br>
+
+            <label for="resume">Introductory Video<sup class="mandatory_field">*</sup></label>
+            <button id="camera" class="btn btn-success border-0 w-100 " data-toggle="modal" data-target="#cameraModal">
+                <i class="fas fa-video"></i> Upload Video</button>
+            <div class=" my-4">
+                <div class="row">
+                    <div class="col-12">
+                        <input type="button" class="btn btn-success border-0 w-100" value="Submit" id="submit" />
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+    </section>
+
+    <!-- Bootstrap Modal for Camera/Recording -->
+    <div class="modal fade" id="cameraModal" tabindex="-1" role="dialog" aria-labelledby="cameraModalLabel"
+        aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content  p-3">
+                <div class="modal-body">
+                    <button type="button" id="close-button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <video class="preview_video" id="previewVideo" controls playsinline></video>
+                    <div id="video">
+                        <label for="video">Introductory Video (MP4, max 100MB, max 1 minute):</label>
+                        <span id="videoError" class="error"></span><br>
+
+                        <div id="recording-instructions">
+                            <ul>
+                                <li>Self-Introduction and Educational background.</li>
+                                <li>Work experience(if any).</li>
+                                <li>Talk about personal interests or hobbies.</li>
+                                <li>Share any additional information you'd like to.</li>
+                            </ul>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-3">
+                            <button id="discard-video" style="display: none;"
+                                class="btn btn-danger text-white border-0 px-4">Discard Video</button>
+                            <button id="retake-video" style="display: none;"
+                                class="btn btn-warning text-white border-0 px-4">Retake Video</button>
+                        </div>
+
+                        <input type="file" id="input_video" name="video" accept="video/mp4" required />
+                        <div class="d-flex justify-content-between mt-3">
+                            <button id="startCamera" class="btn btn-primary text-white border-0 px-4">Start
+                                Camera</button>
+                            <button id="startButton" disabled class="btn btn-primary text-white border-0 px-4">Start
+                                Recording</button>
+                        </div>
+                        <button id="stopButton" disabled style="display: none;"
+                            class="btn btn-danger mx-auto mt-3 text-white border-0 px-4">Stop Recording</button>
+
+                        <div class="position-relative video__box" id="preview">
+                            <video class="camera_video" id="recordedVideo" autoplay playsinline muted></video>
+                        </div>
+                        <div id="timer" style="display: none;">Starting</div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-success" id="video-upload" data-dismiss="modal">Upload</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- respond-page -->
+    <div id="response" style="display: none;">
+        <h1>Thank You for Your Response</h1>
+        <p>We appreciate your submission. Your response has been received</p>
+        <p>Thank you for taking the time to provide us with your information. If you have any further questions or need
+            assistance, please feel free to contact us.</p>
+    </div>
+
+    <script src="app.js"></script>
+    <script src="timer.js"></script>
+
+    <!-- Add Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

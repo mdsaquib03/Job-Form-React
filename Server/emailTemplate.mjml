@@ -1,0 +1,27 @@
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-text> Hi {name}, </mj-text>
+        <mj-text>
+          Thanks for applying at Codalien Technologies for the Marketing and Sales role. We appreciate your interest.
+        </mj-text>
+        <mj-text>
+          Our team will carefully evaluate your application, and we will get in touch with you shortly!
+        </mj-text>
+        <mj-text>
+          Best Regards,
+          <br />
+          Codalien Technologies Pvt. Ltd.
+          <br />
+          (Talent Acquisition Team)
+          <br />
+          <br />
+        </mj-text>
+        <mj-text>
+          <strong>**Please be advised that this email is generated from an unmonitored mailbox. Regrettably, responses to this email will not be reviewed or acknowledged.</strong>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
